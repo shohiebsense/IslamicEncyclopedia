@@ -10,7 +10,7 @@ Remaking using Flutter, Flew To Github In 2021/03/09
 
 1. Februari 2021 - Peletakan Batu Pertama
 2. Awal Maret 2021 - Pakemin Konsep dan Layout
-![First Init](https://github.com/shohiebsense/IslamicEncyclopedia/blob/master/IE_2021_03_10.gif)
+![First Init](https://github.com/shohiebsense/IslamicEncyclopedia/blob/master/IE_2021_03_10.gif)){:height="36px" width="36px"}.
 3. ...
 
 ## Todo
