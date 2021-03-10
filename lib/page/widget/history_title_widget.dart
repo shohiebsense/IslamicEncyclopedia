@@ -1,7 +1,7 @@
 import 'package:ensiklopedia_islam/model/category.dart';
 import 'package:ensiklopedia_islam/model/history.dart';
 import 'package:ensiklopedia_islam/model/history_detail.dart';
-import 'package:ensiklopedia_islam/page/card_page.dart';
+import 'file:///C:/AndroidStudioProjectsFlutter/ensiklopedia_islam/lib/page/widget/history_item_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 

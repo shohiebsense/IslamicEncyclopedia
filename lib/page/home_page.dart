@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:timelines/timelines.dart';
 
-import 'card_page.dart';
+import 'widget/history_item_card_view.dart';
 import 'widget/history_body_view.dart';
 import 'widget/history_timeline_view.dart';
 
@@ -24,8 +24,8 @@ class _HomePageState extends State<HomePage>
   bool isScrollingDown = false;
   bool flagScrolling = true;
 
-  GlobalKey<Card1State> key = GlobalKey();
-  GlobalKey<Card1State> key2 = GlobalKey();
+  GlobalKey<HistoryItemCardViewState> key = GlobalKey();
+  GlobalKey<HistoryItemCardViewState> key2 = GlobalKey();
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
           },
           body: TabBarView(
             controller: tabController,
-            children: [Card1(key), Card1(key2)],
+            children: [HistoryItemCardView(key), HistoryItemCardView(key2)],
           ),
         ),
         bottomNavigationBar: BottomNavBarView(() {

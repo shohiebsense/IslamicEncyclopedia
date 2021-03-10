@@ -10,17 +10,17 @@ const loremIpsum =
 List<String> paragraphList = loremIpsum.split(". ");
 StringBuffer stringBuffer = new StringBuffer();
 
-class Card1 extends StatefulWidget {
+class HistoryItemCardView extends StatefulWidget {
   //final bool isScrolling;
   final Key key;
 
-  Card1(this.key) : super(key: key);
+  HistoryItemCardView(this.key) : super(key: key);
 
   @override
-  Card1State createState() => Card1State();
+  HistoryItemCardViewState createState() => HistoryItemCardViewState();
 }
 
-class Card1State extends State<Card1> with AfterLayoutMixin<Card1> {
+class HistoryItemCardViewState extends State<HistoryItemCardView> with AfterLayoutMixin<HistoryItemCardView> {
   ExpandableController expandableController;
   bool initFlag = false;
 
