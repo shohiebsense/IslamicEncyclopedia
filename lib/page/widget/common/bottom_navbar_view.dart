@@ -1,4 +1,5 @@
 
+import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBarView extends StatelessWidget {
@@ -11,26 +12,38 @@ class BottomNavBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: COLOR_DEFAULT,
+      unselectedItemColor: Colors.white,
+      showUnselectedLabels: true,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Histori',
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xff1f1f1f),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.business),
           label: 'Nabi',
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xff1f1f1f),
         ),
         BottomNavigationBarItem(
+
+          icon: Icon(Icons.school),
+          label: 'Sahabat',
+
+          backgroundColor: Color(0xff1f1f1f),
+        ),
+        BottomNavigationBarItem(
+
           icon: Icon(Icons.school),
           label: 'Ulama',
-          backgroundColor: Colors.purple,
+
+          backgroundColor: Color(0xff1f1f1f),
         ),
 
       ],
+      selectedItemColor: Colors.amber,
       currentIndex: _selectedIndex,
-      selectedItemColor: Colors.amber[800],
       onTap: onNanBarItemTapped(),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:after_layout/after_layout.dart';
+import 'package:ensiklopedia_islam/page/widget/history_header_view.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -69,7 +70,7 @@ class Card1State extends State<Card1> with AfterLayoutMixin<Card1> {
             child: ExpandableNotifier(
               //controller: expandableController,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: ScrollOnExpand(
                   scrollOnExpand: true,
                   scrollOnCollapse: false,
@@ -80,16 +81,24 @@ class Card1State extends State<Card1> with AfterLayoutMixin<Card1> {
                       tapBodyToCollapse: false,
                     ),
                     collapsed: SizedBox(
-                      height: 150,
-                      child: Text(
-                        loremIpsum,
-                        softWrap: true,
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 21.5,
-                            fontWeight: FontWeight.w600),
+                      height: 400,
+                      child: Column(
+                        children: [
+                          HistoryHeaderView(1),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              loremIpsum,
+                              softWrap: true,
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 21.5,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     expanded: Text.rich(TextSpan(
@@ -101,7 +110,7 @@ class Card1State extends State<Card1> with AfterLayoutMixin<Card1> {
                     builder: (_, collapsed, expanded) {
                       return Padding(
                         padding:
-                            EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                            EdgeInsets.only(left: 0, right: 0, bottom: 0),
                         child: Expandable(
                           // controller: expandableController,
                           collapsed: collapsed,
