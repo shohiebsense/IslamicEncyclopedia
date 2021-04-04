@@ -34,7 +34,7 @@ class HistoryTabViewState extends State<HistoryTabView>
   HistoryDetailDao historyDetailDao;
   HistoryTabViewState(this.historyDetailDao);
 
-  late final Future<List<HistoryDetail>>  _periodList =  historyDetailDao.findAllHistoryDetails();
+  late final Future<List<HistoryDetail>>  _periodList;
   bool initFlag = false;
 
   @override
@@ -45,8 +45,9 @@ class HistoryTabViewState extends State<HistoryTabView>
 
   @override
   void initState() {
-    super.initState();
+    _periodList =  historyDetailDao.findAllHistoryDetails();
     expandableController = ExpandableController();
+    super.initState();
   }
 
   @override
@@ -62,7 +63,6 @@ class HistoryTabViewState extends State<HistoryTabView>
             future: _periodList,
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyDetail) {
-              print("future builder built");
               int length = historyDetail.data != null ? historyDetail.data!.length : 0;
               return ExpandableTheme(
                 data: const ExpandableThemeData(

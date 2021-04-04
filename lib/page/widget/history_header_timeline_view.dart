@@ -31,8 +31,14 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
 
 
   _HistoryHeaderTimelineViewState(this.historyDetailDao);
-  late final Future<List<HistoryDetail>>  _periodList =  historyDetailDao.findAllPeriods();
+  late final Future<List<HistoryDetail>>  _periodList;
 
+
+  @override
+  void initState() {
+    _periodList =  historyDetailDao.findAllPeriods();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +50,8 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
             future: _periodList,
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyList) {
-              print("history List size ${historyList.data!.length}");
-
-              return FixedTimeline.tileBuilder(
+              return historyList.data == null ?  Container() :
+              FixedTimeline.tileBuilder(
                 theme: TimelineThemeData(
                   direction: Axis.horizontal,
                   connectorTheme: ConnectorThemeData(
