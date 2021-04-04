@@ -1,7 +1,4 @@
-import 'package:ensiklopedia_islam/model/category.dart';
 import 'package:ensiklopedia_islam/model/history.dart';
-import 'package:ensiklopedia_islam/model/history_detail.dart';
-import 'file:///C:/AndroidStudioProjectsFlutter/ensiklopedia_islam/lib/page/widget/history_item_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
@@ -92,7 +89,7 @@ class _TitleState extends State<_HistoryTitleWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                this.widget.history.name,
+                this.widget.history.name!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
@@ -103,7 +100,7 @@ class _TitleState extends State<_HistoryTitleWidget> {
               ),
               Flexible(
                 child: Text(
-                  this.widget.history.summary,
+                  this.widget.history.summary!,
 
                   //maxLines: 2,
                   //overflow: TextOverflow.ellipsis,

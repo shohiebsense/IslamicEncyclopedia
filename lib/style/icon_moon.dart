@@ -23,7 +23,7 @@ class MoonIcon {
   MoonIcon._();
 
   static const _kFontFam = 'MoonIconFont';
-  static const String _kFontPkg = null;
+  static const String? _kFontPkg = null;
 
   static const IconData moon = IconData(0xf186, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

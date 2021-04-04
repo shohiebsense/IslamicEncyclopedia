@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 @immutable
-class HistoryBodyView extends StatelessWidget {
+class ProphetTabHeaderView extends StatelessWidget {
   bool innerBoxIsScrolled;
 
-   HistoryBodyView(this.innerBoxIsScrolled);
+   ProphetTabHeaderView(this.innerBoxIsScrolled);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,13 @@ class HistoryBodyView extends StatelessWidget {
             child: RichText(
               text: TextSpan(children: [
                 TextSpan(
-                  text: 'Terbentuknya Umat Islam',
+                  text: 'NabiIslam',
                   style: TextStyle(fontSize: 27),
                 ),
                 TextSpan(text: '\n\n'),
                 TextSpan(
                     text:
-                    'Periode Kenabian sebelum tegaknya Daulah Islam merupakan periode dimana Muhammad saw. diangkat menjadi Rasul dan terjadinya Baiat Aqabah Pertama dan Baiat Aqabah Kedua.',
+                    'Dolor Lipsum',
                     style: TextStyle(fontSize: 24))
               ]),
             ),

@@ -1,5 +1,11 @@
+
+import 'package:floor/floor.dart';
+
+
 class Category {
-  int id;
-  String name;
-  String nameEnglish;
+  final int id;
+  final String name;
+  final String nameEnglish;
+
+  Category(this.id, this.name, this.nameEnglish);
 }
