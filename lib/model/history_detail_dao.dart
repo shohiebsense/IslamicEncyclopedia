@@ -11,11 +11,11 @@ abstract class HistoryDetailDao {
   @Query('SELECT * FROM HistoryDetail')
   Stream<List<HistoryDetail>> findAllHistoryDetailsAsStream();
 
-  @Query('SELECT * FROM HistoryDetail WHERE history_id = :historyId')
-  Future<List<HistoryDetail>> findAllHistoryDetailsById(final int historyId);
+  @Query('SELECT * FROM HistoryDetail WHERE history_id = :historyId ORDER BY period')
+  Future<List<HistoryDetail>> findAllHistoryDetailsGroupById(final int historyId);
 
   //dude .....
-  @Query('SELECT * FROM HistoryDetail GROUP BY history_id')
+  @Query('SELECT * FROM HistoryDetail GROUP BY history_id ORDER BY history_id')
   Future<List<HistoryDetail>> findAllPeriods();
 
 }

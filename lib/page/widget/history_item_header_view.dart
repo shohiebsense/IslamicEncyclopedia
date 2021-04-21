@@ -15,7 +15,7 @@ class HistoryHeaderView extends StatelessWidget {
           Image.asset(
             "assets/bg_history_header.jpg",
             height: 140,
-            width: MediaQuery.of(context).size.width,
+            width: 90,
             fit: BoxFit.fitWidth,
           ),
           Text(

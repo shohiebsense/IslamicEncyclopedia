@@ -3,11 +3,11 @@ import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
-import 'package:ensiklopedia_islam/page/tab/history_tab_header_view.dart';
-import 'package:ensiklopedia_islam/page/widget/history_item_header_view.dart';
 import 'package:ensiklopedia_islam/page/widget/history_item_view.dart';
+import 'package:ensiklopedia_islam/model/history_header.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 StringBuffer stringBuffer = new StringBuffer();
 class HistoryTabView extends StatefulWidget {
@@ -34,7 +34,6 @@ class HistoryTabViewState extends State<HistoryTabView>
   HistoryDetailDao historyDetailDao;
   HistoryTabViewState(this.historyDetailDao);
 
-  late final Future<List<HistoryDetail>>  _periodList;
   bool initFlag = false;
 
   @override
@@ -45,9 +44,14 @@ class HistoryTabViewState extends State<HistoryTabView>
 
   @override
   void initState() {
-    _periodList =  historyDetailDao.findAllHistoryDetails();
     expandableController = ExpandableController();
     super.initState();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+
   }
 
   @override
@@ -60,7 +64,7 @@ class HistoryTabViewState extends State<HistoryTabView>
       children: [
         Expanded(
           child: FutureBuilder(
-            future: _periodList,
+            future: historyDetailDao.findAllHistoryDetailsGroupById(context.watch<HistoryHeader>().historyId),
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyDetail) {
               int length = historyDetail.data != null ? historyDetail.data!.length : 0;
@@ -80,7 +84,7 @@ class HistoryTabViewState extends State<HistoryTabView>
                     );
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return HistoryItemView(index: index + 1, desc: historyDetail.data![index+1].desc);
+                    return HistoryItemView(index: index, desc: historyDetail.data![index].desc);
                   },
                 ),
               );

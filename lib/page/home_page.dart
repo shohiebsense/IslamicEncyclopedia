@@ -1,9 +1,12 @@
 // @dart=2.9
 import 'package:after_layout/after_layout.dart';
+import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
-import 'package:ensiklopedia_islam/page/tab/prophet_tab_header_view.dart';
+import 'file:///C:/AndroidStudioProjectsFlutter/ensiklopedia_islam/lib/page/widget/prophet_tab_header_view.dart';
 import 'package:ensiklopedia_islam/page/tab/prophet_tab_view.dart';
+import 'package:ensiklopedia_islam/page/tab/sahabah_tab_view.dart';
+import 'package:ensiklopedia_islam/page/tab/ulama_tab_view.dart';
 import 'package:ensiklopedia_islam/page/widget/common/app_bar.dart';
 import 'package:ensiklopedia_islam/page/widget/common/bottom_navbar_view.dart';
 import 'package:ensiklopedia_islam/page/widget/history_header_timeline_view.dart';
@@ -14,13 +17,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:timelines/timelines.dart';
 
 import 'tab/history_tab_view.dart';
-import 'tab/history_tab_header_view.dart';
+import 'widget/history_tab_header_view.dart';
 
 class HomePage extends StatefulWidget {
+  final BiographyDao biographyDao;
   final HistoryDetailDao historyDetailDao;
   final HistoryDao historyDao;
 
-  const HomePage({this.historyDetailDao, this.historyDao});
+  const HomePage({this.historyDetailDao, this.historyDao, this.biographyDao});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -37,15 +41,15 @@ class _HomePageState extends State<HomePage>
 
   PageStorageKey historyStorageKey = PageStorageKey('history');
   PageStorageKey prophetStorageKey = PageStorageKey('prophet');
+  PageStorageKey ulamaStorageKey = PageStorageKey('ulama');
+  PageStorageKey sahabahStorageKey = PageStorageKey('sahabah');
 
   GlobalKey<HistoryTabViewState> key = GlobalKey();
   GlobalKey<HistoryTabViewState> key2 = GlobalKey();
 
-
-
   @override
   _HomePageState() {
-    tabController = TabController(vsync: this, length: 1);
+    tabController = TabController(vsync: this, length: 4);
   }
 
   @override
@@ -61,13 +65,19 @@ class _HomePageState extends State<HomePage>
     return this.widget.historyDetailDao;
   }
 
-  Widget _generateHeader(bool innerBoxIsScrolled) {
+  List<Widget> _generateHeader(bool innerBoxIsScrolled) {
     switch (tabController.index) {
       case 0:
-        return HistoryTabHeaderView(innerBoxIsScrolled);
+        return  [
+            HistoryHeaderTimelineView(this.widget.historyDao,
+                this.widget.historyDetailDao, () {
+
+                }),
+            HistoryTabHeaderView(innerBoxIsScrolled)
+          ];
       //case 1: return ProphetTabHeaderView(innerBoxIsScrolled);
     }
-    return HistoryTabHeaderView(innerBoxIsScrolled);
+    return  [EnsiklopediaIslamAppBar()];
   }
 
   @override
@@ -77,7 +87,7 @@ class _HomePageState extends State<HomePage>
       builder:
           (BuildContext context, AsyncSnapshot<HistoryDetailDao> snapshot) {
         return DefaultTabController(
-          length: 2,
+          length: 4,
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: NestedScrollView(
@@ -91,12 +101,7 @@ class _HomePageState extends State<HomePage>
                     delegate: new SliverChildListDelegate(
                       <Widget>[
                         Column(
-                          children: [
-                            EnsiklopediaIslamAppBar(),
-                            _generateHeader(innerBoxIsScrolled),
-                            HistoryHeaderTimelineView(this.widget.historyDao,
-                                this.widget.historyDetailDao, () {}),
-                          ],
+                          children: _generateHeader(innerBoxIsScrolled)
                         ),
                       ],
                     ),
@@ -105,19 +110,23 @@ class _HomePageState extends State<HomePage>
                 ];
               },
               body: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: tabController,
-                  children: [
-                    HistoryTabView(historyStorageKey, this.widget.historyDetailDao, this.widget.historyDao),
-                  ] //ProphetTabView(prophetStorageKey, this.widget.historyDetailDao)],
-                  ),
+                physics: NeverScrollableScrollPhysics(),
+                controller: tabController,
+                children: [
+                  HistoryTabView(historyStorageKey,
+                      this.widget.historyDetailDao, this.widget.historyDao),
+                  ProphetTabView(prophetStorageKey, this.widget.biographyDao),
+                  UlamaTabView(ulamaStorageKey, this.widget.biographyDao),
+                  SahabahTabView(sahabahStorageKey, this.widget.biographyDao),
+                ], //,
+              ),
             ),
             bottomNavigationBar: BottomNavBarView((int index) {
               setState(() {
-                if (tabController.previousIndex == index) {
+                /*if (tabController.previousIndex == index) {
                   // _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
                   return;
-                }
+                }*/
                 tabController.index = index;
               });
             }),

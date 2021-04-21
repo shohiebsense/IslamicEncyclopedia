@@ -50,6 +50,7 @@ class _HistoryTabHeaderViewState extends State<HistoryTabHeaderView> {
                   ])),
                 ),
               ),
+              SizedBox(height: 4,)
             ],
           ),
         );

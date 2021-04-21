@@ -8,7 +8,7 @@ abstract class HistoryDao {
   @Query('SELECT * FROM History')
   Future<List<History>> findAllHistory();
 
-  @Query('SELECT * FROM History WHERE id=:id')
+  @Query('SELECT * FROM History WHERE id=:id ORDER BY id')
   Future<History?> findHistoryById(final int id);
 
   @Query('SELECT * FROM History')

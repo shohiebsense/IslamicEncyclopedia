@@ -42,21 +42,29 @@ class HistoryItemView extends StatelessWidget {
                 ),
                 child: SizedBox(
                   height: 290,
-                  child: Column(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HistoryHeaderView(index),
-                      Padding(
-                        padding: index == 0 ? const EdgeInsets.fromLTRB(
-                            8.0, 0, 8.0, 0) : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-                        child: Text(
-                          desc,
-                          softWrap: true,
-                          maxLines: 5,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 21.5,
-                              fontWeight: FontWeight.w600),
+                      HistoryHeaderView(index+1),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: index == 0 ? const EdgeInsets.fromLTRB(
+                                  8.0, 0, 8.0, 0) : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                              child: Text(
+                                desc,
+                                softWrap: true,
+                                maxLines: 5,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 21.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
 

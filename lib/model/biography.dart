@@ -9,11 +9,8 @@ class Biography {
   final String story;
   @ColumnInfo(name: "category_id")
   final int categoryId;
-  //final String image;
   final String lifetime;
 
-  //final String mukjizatEnglish;
-  //final String storyEnglish;
   final int sort;
   final int bookmark;
 

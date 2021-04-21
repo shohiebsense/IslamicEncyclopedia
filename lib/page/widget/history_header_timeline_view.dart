@@ -1,4 +1,3 @@
-
 import 'package:ensiklopedia_islam/main.dart';
 import 'package:ensiklopedia_islam/model/history.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
@@ -19,25 +18,51 @@ class HistoryHeaderTimelineView extends StatefulWidget {
   final HistoryDetailDao historyDetailDao;
   Function onTimelineChanged;
 
-  HistoryHeaderTimelineView(this.historyDao, this.historyDetailDao, this.onTimelineChanged);
+  HistoryHeaderTimelineView(this.historyDao, this.historyDetailDao,
+      this.onTimelineChanged);
 
   @override
-  _HistoryHeaderTimelineViewState createState() => _HistoryHeaderTimelineViewState(historyDetailDao);
+  _HistoryHeaderTimelineViewState createState() =>
+      _HistoryHeaderTimelineViewState(historyDetailDao);
 }
 
 class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
-  int currentPosition = 1;
+  int currentPosition = 0;
   HistoryDetailDao historyDetailDao;
 
-
   _HistoryHeaderTimelineViewState(this.historyDetailDao);
-  late final Future<List<HistoryDetail>>  _periodList;
 
 
   @override
   void initState() {
-    _periodList =  historyDetailDao.findAllPeriods();
     super.initState();
+  }
+
+  Future<List<HistoryDetail>> findAllHistoryDetailsById() {
+    Future<List<HistoryDetail>> value = historyDetailDao
+        .findAllHistoryDetailsGroupById(context
+        .watch<HistoryHeader>()
+        .historyId);
+
+
+    return value;
+  }
+
+
+  void onTimelineTapped(List<HistoryDetail> historyList, int index){
+    historyList.forEach((element) {
+      print(element.historyId);
+    });
+    print("history List  ${historyList.length}");
+    int historyId = historyList[currentPosition].historyId;
+    print("historyId $historyId $currentPosition");
+
+    this.widget.historyDao.findHistoryById(historyId).then((
+        value) {
+      context.read<HistoryHeader>()
+          .toggleCurrentTitle(
+          value!.name!, value.summary!, value.id);
+    });
   }
 
   @override
@@ -47,10 +72,12 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: FutureBuilder(
-            future: _periodList,
+            future: historyDetailDao.findAllPeriods(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyList) {
-              return historyList.data == null ?  Container() :
+              onTimelineTapped(historyList.data!, currentPosition);
+              return historyList.data == null ? Container() :
+
               FixedTimeline.tileBuilder(
                 theme: TimelineThemeData(
                   direction: Axis.horizontal,
@@ -69,11 +96,10 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
                           onTap: () {
                             setState(() {
                               currentPosition = index;
-                             // this.page.widget.onTimelineChanged(_periods[currentPosition].historyId);
 
-                              this.widget.historyDao.findHistoryById(historyList.data![index].historyId).then((value) {
-                                context.read<HistoryHeader>().toggleCurrentTitle(value!.name!, value.summary!);
-                              });
+                              onTimelineTapped(historyList.data!, index);
+
+
                               //this.page.widget.onTimelineTapped(currentPosition);
                               print('Card Tapped');
                               print("current POSITION $currentPosition");
@@ -114,7 +140,7 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
                       ),
                     );
                   },
-                  itemCount:historyList.data!.length,
+                  itemCount: historyList.data!.length,
                 ),
               );
             }

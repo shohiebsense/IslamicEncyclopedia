@@ -3,6 +3,7 @@
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
+import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
 import 'package:ensiklopedia_islam/page/home_page.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => HistoryHeader(),)
 
       ],
-      child: MyApp(biographyDao, historyDao, historyDetailDao)));
+      child: MyApp(
+          biographyDao, historyDao, historyDetailDao)));
 }
 
 class MyApp extends StatelessWidget {
@@ -47,12 +49,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage()} ,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'PTSerif'
       ),
       home:
-      HomePage(historyDetailDao: historyDetailDao, historyDao: historyDao)
+      HomePage(historyDetailDao: historyDetailDao, historyDao: historyDao, biographyDao: biographyDao,)
     );
   }
 }

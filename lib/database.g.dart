@@ -136,6 +136,51 @@ class _$BiographyDao extends BiographyDao {
             row['sort'] as int,
             row['bookmark'] as int));
   }
+
+  @override
+  Future<List<Biography>> findAllProphet() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM Biography ORDER BY id LIMIT 25',
+        mapper: (Map<String, Object?> row) => Biography(
+            row['id'] as int,
+            row['name'] as String,
+            row['mukjizat'] as String,
+            row['story'] as String,
+            row['category_id'] as int,
+            row['lifetime'] as String,
+            row['sort'] as int,
+            row['bookmark'] as int));
+  }
+
+  @override
+  Future<List<Biography>> findAllSahabah() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM Biography WHERE category_id = 1002 ORDER BY name',
+        mapper: (Map<String, Object?> row) => Biography(
+            row['id'] as int,
+            row['name'] as String,
+            row['mukjizat'] as String,
+            row['story'] as String,
+            row['category_id'] as int,
+            row['lifetime'] as String,
+            row['sort'] as int,
+            row['bookmark'] as int));
+  }
+
+  @override
+  Future<List<Biography>> findAllUlama() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM Biography WHERE category_id = 1003 ORDER BY name',
+        mapper: (Map<String, Object?> row) => Biography(
+            row['id'] as int,
+            row['name'] as String,
+            row['mukjizat'] as String,
+            row['story'] as String,
+            row['category_id'] as int,
+            row['lifetime'] as String,
+            row['sort'] as int,
+            row['bookmark'] as int));
+  }
 }
 
 class _$HistoryDao extends HistoryDao {
@@ -228,7 +273,7 @@ class _$HistoryDetailDao extends HistoryDetailDao {
   }
 
   @override
-  Future<List<HistoryDetail>> findAllHistoryDetailsById(int historyId) async {
+  Future<List<HistoryDetail>> findAllHistoryDetailsGroupById(int historyId) async {
     return _queryAdapter.queryList(
         'SELECT * FROM HistoryDetail WHERE history_id = ?',
         arguments: [historyId],

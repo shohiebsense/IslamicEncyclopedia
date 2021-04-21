@@ -2,7 +2,6 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/biography.dart';
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
-import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 // ignore: import_of_legacy_library_into_null_safe
@@ -14,23 +13,22 @@ const loremIpsum = "Kisah Nabi";
 List<String> paragraphList = loremIpsum.split(". ");
 StringBuffer stringBuffer = new StringBuffer();
 
-class ProphetTabView extends StatefulWidget {
+class SahabahTabView extends StatefulWidget {
   //final bool isScrolling;
   final PageStorageKey key;
   final BiographyDao biographyDao;
 
-  ProphetTabView(this.key, this.biographyDao) : super(key: key);
+  SahabahTabView(this.key, this.biographyDao) : super(key: key);
 
   @override
-  ProphetTabViewState createState() => ProphetTabViewState();
+  SahabahTabViewState createState() => SahabahTabViewState();
 }
 
-class ProphetTabViewState extends State<ProphetTabView>
-    with AfterLayoutMixin<ProphetTabView> {
+class SahabahTabViewState extends State<SahabahTabView>
+    with AfterLayoutMixin<SahabahTabView> {
   ExpandableController? expandableController;
   bool initFlag = false;
   List<Biography> biographyList = [];
-
 
   @override
   void afterFirstLayout(BuildContext context) async {
@@ -43,7 +41,7 @@ class ProphetTabViewState extends State<ProphetTabView>
 
   Future<List<Biography>> getList() async {
     return getDao().then((value) {
-      return value.findAllProphet().then((value) {
+      return value.findAllSahabah().then((value) {
         biographyList = value;
 
         return value;
@@ -70,7 +68,7 @@ class ProphetTabViewState extends State<ProphetTabView>
             iconColor: Colors.blue,
           ),
           child: ListView.separated(
-            key: PageStorageKey('prophet'),
+            key: PageStorageKey('sahabah'),
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
@@ -98,76 +96,67 @@ class ProphetTabViewState extends State<ProphetTabView>
                           tapBodyToExpand: true,
                           tapBodyToCollapse: false,
                         ),
-                        collapsed: InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, BiographyDetailPage.routeName, arguments: BiographyDetailArgs(index, biographyList.data![index]));
-                          },
-                          child: SizedBox(
-                            height: 110,
-                            child: Row(
-                              children: [
-                                //HistoryHeaderView(index+1),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Container(
-                                      margin: EdgeInsets.all(12),
-                                      width: 30,
-                                      height: 30,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(4),
-                                            bottomRight: Radius.circular(4),
-                                            topLeft: Radius.circular(4),
-                                            topRight: Radius.circular(4)),
-                                        child: Hero(
-                                          tag: index,
-                                          child: Container(
-                                            color: Colors.greenAccent,
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text((index + 1)
-                                                  .toString()
-                                                  .toPersianDigit()),
-                                            ),
-                                          ),
-                                        ),
-                                      )),
-                                ),
-
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(8.0, 16, 8,8),
-                                        child: Text(
-                                          biographyList.data![index].name,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                        collapsed: SizedBox(
+                          height: 110,
+                          child: Row(
+                            children: [
+                              //HistoryHeaderView(index+1),
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                    margin: EdgeInsets.all(12),
+                                    width: 30,
+                                    height: 30,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(4),
+                                          bottomRight: Radius.circular(4),
+                                          topLeft: Radius.circular(4),
+                                          topRight: Radius.circular(4)),
+                                      child: Container(
+                                        color: Colors.greenAccent,
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text((index + 1)
+                                              .toString()
+                                              .toPersianDigit()),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          biographyList.data![index].story,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w200),
-                                        ),
+                                    )),
+                              ),
+
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(8.0, 16, 8,8),
+                                      child: Text(
+                                        biographyList.data![index].name,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        biographyList.data![index].story,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w200),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         expanded: Text.rich(TextSpan(
