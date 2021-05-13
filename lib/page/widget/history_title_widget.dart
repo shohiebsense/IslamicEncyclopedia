@@ -30,7 +30,7 @@ class _State extends State<HistoryWidget> {
                   child: InkWell(
                     splashColor: Colors.grey.withAlpha(30),
                     onTap: () {
-                      print('Card Tapped');
+                      //card tapped
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

@@ -1,5 +1,6 @@
 
 import 'package:ensiklopedia_islam/model/biography.dart';
+import 'package:ensiklopedia_islam/page/widget/common/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
@@ -16,26 +17,33 @@ class BiographyDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BiographyDetailArgs biographyDetailArgs = ModalRoute.of(context)!.settings.arguments as BiographyDetailArgs;
-    return Row(
-      children: [
-        Hero(
-          tag: biographyDetailArgs.index,
-          child: Container(
-            color: Colors.greenAccent,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text((biographyDetailArgs.index + 1)
-                  .toString()
-                  .toPersianDigit()),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Hero(
+              tag: biographyDetailArgs.index,
+              child: Container(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text((biographyDetailArgs.index + 1)
+                      .toString()
+                      .toPersianDigit()),
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              child: Text(
+                biographyDetailArgs.biography.story,
+                style: TextStyle(
+                  fontSize: 18
+                ),
+              ),
+            )
+          ],
         ),
-        Expanded(
-          child: Text(
-            biographyDetailArgs.biography.story
-          ),
-        )
-      ],
+      ),
     );
   }
 }

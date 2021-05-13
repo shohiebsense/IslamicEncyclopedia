@@ -19,6 +19,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
     widget.onNanBarItemTapped(index);
 
     setState((){
+
       _selectedIndex = index;
     });
   }

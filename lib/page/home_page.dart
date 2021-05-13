@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage>
   bool isScrolling = false;
   bool isScrollingDown = false;
   bool flagScrolling = true;
+  String tabTitle;
 
   PageStorageKey historyStorageKey = PageStorageKey('history');
   PageStorageKey prophetStorageKey = PageStorageKey('prophet');
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    tabTitle = "Sejarah";
   }
 
   void onCurrentIndexChanged(int position) {
@@ -68,16 +70,21 @@ class _HomePageState extends State<HomePage>
   List<Widget> _generateHeader(bool innerBoxIsScrolled) {
     switch (tabController.index) {
       case 0:
-        return  [
-            HistoryHeaderTimelineView(this.widget.historyDao,
-                this.widget.historyDetailDao, () {
-
-                }),
-            HistoryTabHeaderView(innerBoxIsScrolled)
-          ];
+        return [
+          EnsiklopediaIslamAppBar(
+            title: tabTitle,
+          ),
+          HistoryHeaderTimelineView(
+              this.widget.historyDao, this.widget.historyDetailDao, () {}),
+          HistoryTabHeaderView(innerBoxIsScrolled)
+        ];
       //case 1: return ProphetTabHeaderView(innerBoxIsScrolled);
     }
-    return  [EnsiklopediaIslamAppBar()];
+    return [
+      EnsiklopediaIslamAppBar(
+        title: tabTitle,
+      )
+    ];
   }
 
   @override
@@ -100,9 +107,7 @@ class _HomePageState extends State<HomePage>
                   SliverList(
                     delegate: new SliverChildListDelegate(
                       <Widget>[
-                        Column(
-                          children: _generateHeader(innerBoxIsScrolled)
-                        ),
+                        Column(children: _generateHeader(innerBoxIsScrolled)),
                       ],
                     ),
                   ),
@@ -127,6 +132,28 @@ class _HomePageState extends State<HomePage>
                   // _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
                   return;
                 }*/
+                switch (index) {
+                  case 0:
+                    {
+                      tabTitle = 'Sejarah';
+                    }
+                    break;
+                  case 1:
+                    {
+                      tabTitle = 'Nabi';
+                    }
+                    break;
+                  case 2:
+                    {
+                      tabTitle = 'Sahabat';
+                    }
+                    break;
+                  case 3:
+                    {
+                      tabTitle = 'Ulama';
+                    }
+                    break;
+                }
                 tabController.index = index;
               });
             }),

@@ -4,6 +4,7 @@ import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 import 'package:ensiklopedia_islam/model/history_header.dart';
+import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:ensiklopedia_islam/style/icon_moon.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +51,8 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
 
 
   void onTimelineTapped(List<HistoryDetail> historyList, int index){
-    historyList.forEach((element) {
-      print(element.historyId);
-    });
-    print("history List  ${historyList.length}");
+
     int historyId = historyList[currentPosition].historyId;
-    print("historyId $historyId $currentPosition");
 
     this.widget.historyDao.findHistoryById(historyId).then((
         value) {
@@ -68,6 +65,7 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: COLOR_DEFAULT,
       height: 150,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -75,9 +73,10 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
             future: historyDetailDao.findAllPeriods(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyList) {
-              onTimelineTapped(historyList.data!, currentPosition);
-              return historyList.data == null ? Container() :
-
+              if(historyList.hasData){
+                onTimelineTapped(historyList.data!, currentPosition);
+              }
+              return !historyList.hasData ? Container() :
               FixedTimeline.tileBuilder(
                 theme: TimelineThemeData(
                   direction: Axis.horizontal,
@@ -101,13 +100,13 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
 
 
                               //this.page.widget.onTimelineTapped(currentPosition);
-                              print('Card Tapped');
-                              print("current POSITION $currentPosition");
+                              //print('Card Tapped');
+                              //print("current POSITION $currentPosition");
                             });
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(historyList.data![index].period),
+                            child: Text(historyList.data![index].period, style: TextStyle(color: Colors.white),),
                           ),
                         ),
                       ),

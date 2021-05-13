@@ -12,15 +12,9 @@ class HistoryHeaderView extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            "assets/bg_history_header.jpg",
-            height: 140,
-            width: 90,
-            fit: BoxFit.fitWidth,
-          ),
           Text(
             number.toString().toPersianDigit(),
-            style: TextStyle(fontSize: 48),
+            style: TextStyle(fontSize: 48, color: Colors.white),
           )
         ],
       ),

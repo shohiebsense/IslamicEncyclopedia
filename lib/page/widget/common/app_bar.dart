@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class EnsiklopediaIslamAppBar extends StatelessWidget {
+  String? title;
+
+  EnsiklopediaIslamAppBar({this.title});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -11,7 +15,7 @@ class EnsiklopediaIslamAppBar extends StatelessWidget {
       title: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 16.0),
-          child: TEXT_TOOLBAR_TITLE_DEFAULT,
+          child: title == null ? TEXT_TOOLBAR_TITLE_DEFAULT : Text(title!, style: TEXT_STYLE_DEFAULT,),
         ),
       ),
     );
