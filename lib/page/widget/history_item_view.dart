@@ -12,6 +12,7 @@ class HistoryItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: COLOR_DEFAULT,
       margin: EdgeInsets.zero,
       child: ExpandableNotifier(
         initialExpanded: true,
@@ -24,8 +25,8 @@ class HistoryItemView extends StatelessWidget {
             child: ExpandablePanel(
               theme: const ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
-                tapBodyToExpand: true,
-                tapBodyToCollapse: true,
+                tapBodyToExpand: false,
+                tapBodyToCollapse: false,
               ),
               collapsed: Container(
                 color: COLOR_DEFAULT,

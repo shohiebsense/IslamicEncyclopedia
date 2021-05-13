@@ -14,7 +14,7 @@ class EnsiklopediaIslamAppBar extends StatelessWidget {
       backgroundColor: COLOR_DEFAULT,
       title: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 16.0),
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 24),
           child: title == null ? TEXT_TOOLBAR_TITLE_DEFAULT : Text(title!, style: TEXT_STYLE_DEFAULT,),
         ),
       ),

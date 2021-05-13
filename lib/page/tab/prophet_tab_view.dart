@@ -3,6 +3,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/biography.dart';
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
+import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 // ignore: import_of_legacy_library_into_null_safe
@@ -95,7 +96,7 @@ class ProphetTabViewState extends State<ProphetTabView>
                         theme: const ExpandableThemeData(
                           headerAlignment:
                               ExpandablePanelHeaderAlignment.center,
-                          tapBodyToExpand: true,
+                          tapBodyToExpand: false,
                           tapBodyToCollapse: false,
                         ),
                         collapsed: InkWell(
@@ -122,12 +123,13 @@ class ProphetTabViewState extends State<ProphetTabView>
                                         child: Hero(
                                           tag: index,
                                           child: Container(
-                                            color: Colors.greenAccent,
+                                            color: COLOR_DEFAULT,
                                             child: Align(
                                               alignment: Alignment.center,
                                               child: Text((index + 1)
                                                   .toString()
-                                                  .toPersianDigit()),
+                                                  .toPersianDigit(),
+                                              style: TextStyle(color: Colors.white, fontSize: 18),),
                                             ),
                                           ),
                                         ),

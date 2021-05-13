@@ -5,6 +5,7 @@ import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
 import 'package:ensiklopedia_islam/page/home_page.dart';
+import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage()} ,
       theme: ThemeData(
+        scaffoldBackgroundColor: COLOR_DEFAULT,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'PTSerif'
       ),

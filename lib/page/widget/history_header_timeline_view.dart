@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ensiklopedia_islam/main.dart';
 import 'package:ensiklopedia_islam/model/history.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
@@ -12,7 +14,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:timelines/timelines.dart';
 import 'package:provider/provider.dart';
 
-class HistoryHeaderTimelineView extends StatefulWidget {
+// ignore: must_be_immutable
+class HistoryHeaderTimelineView extends StatelessWidget {
   //final Function(int position) onTimelineTapped;
   //HistoryTimelineView(this.onTimelineTapped);
   final HistoryDao historyDao;
@@ -22,44 +25,24 @@ class HistoryHeaderTimelineView extends StatefulWidget {
   HistoryHeaderTimelineView(this.historyDao, this.historyDetailDao,
       this.onTimelineChanged);
 
-  @override
-  _HistoryHeaderTimelineViewState createState() =>
-      _HistoryHeaderTimelineViewState(historyDetailDao);
-}
-
-class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
-  int currentPosition = 0;
-  HistoryDetailDao historyDetailDao;
-
-  _HistoryHeaderTimelineViewState(this.historyDetailDao);
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  Future<List<HistoryDetail>> findAllHistoryDetailsById() {
-    Future<List<HistoryDetail>> value = historyDetailDao
-        .findAllHistoryDetailsGroupById(context
-        .watch<HistoryHeader>()
-        .historyId);
+  void onTimelineTapped(BuildContext context, List<HistoryDetail> historyList,
+      int index) {
+    int historyId = historyList[index].historyId;
+    int randomIndex = 1 + Random().nextInt(6);
 
-
-    return value;
-  }
-
-
-  void onTimelineTapped(List<HistoryDetail> historyList, int index){
-
-    int historyId = historyList[currentPosition].historyId;
-
-    this.widget.historyDao.findHistoryById(historyId).then((
-        value) {
+    historyDao.findHistoryById(historyId).then((value) {
       context.read<HistoryHeader>()
           .toggleCurrentTitle(
-          value!.name!, value.summary!, value.id);
+          value!.name!, value.summary!, value.id, index, randomIndex);
     });
+  }
+
+  void onTimelineItemTapped(BuildContext context, int index,
+      List<HistoryDetail> data) {
+    onTimelineTapped(context, data, index);
   }
 
   @override
@@ -73,9 +56,7 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
             future: historyDetailDao.findAllPeriods(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<HistoryDetail>> historyList) {
-              if(historyList.hasData){
-                onTimelineTapped(historyList.data!, currentPosition);
-              }
+
               return !historyList.hasData ? Container() :
               FixedTimeline.tileBuilder(
                 theme: TimelineThemeData(
@@ -93,20 +74,15 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
                         child: InkWell(
                           splashColor: Colors.grey.withAlpha(30),
                           onTap: () {
-                            setState(() {
-                              currentPosition = index;
-
-                              onTimelineTapped(historyList.data!, index);
-
-
-                              //this.page.widget.onTimelineTapped(currentPosition);
-                              //print('Card Tapped');
-                              //print("current POSITION $currentPosition");
-                            });
+                            onTimelineItemTapped(context, index,
+                                historyList.data!);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(historyList.data![index].period, style: TextStyle(color: Colors.white),),
+                            child: Text(historyList.data![index].period,
+                              style: TextStyle(color: Colors.white,),
+
+                            ),
                           ),
                         ),
                       ),
@@ -127,9 +103,11 @@ class _HistoryHeaderTimelineViewState extends State<HistoryHeaderTimelineView> {
                     return RawMaterialButton(
                       constraints: BoxConstraints.expand(width: 42, height: 42),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      onPressed: () {},
+                      onPressed: () {
+                        onTimelineItemTapped(context, index, historyList.data!);
+                      },
                       shape: CircleBorder(),
-                      fillColor: (index == currentPosition
+                      fillColor: (index == context.watch<HistoryHeader>().headerIndex
                           ? Colors.green
                           : HexColor("#1F1F1F")),
                       child: Icon(

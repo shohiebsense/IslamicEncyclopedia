@@ -10,6 +10,7 @@ import 'package:ensiklopedia_islam/page/tab/ulama_tab_view.dart';
 import 'package:ensiklopedia_islam/page/widget/common/app_bar.dart';
 import 'package:ensiklopedia_islam/page/widget/common/bottom_navbar_view.dart';
 import 'package:ensiklopedia_islam/page/widget/history_header_timeline_view.dart';
+import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -96,6 +97,7 @@ class _HomePageState extends State<HomePage>
         return DefaultTabController(
           length: 4,
           child: Scaffold(
+            backgroundColor: COLOR_DEFAULT,
             resizeToAvoidBottomInset: false,
             body: NestedScrollView(
               controller: _scrollController,

@@ -17,46 +17,54 @@ class HistoryTabHeaderView extends StatefulWidget {
   _HistoryTabHeaderViewState createState() => _HistoryTabHeaderViewState();
 }
 
-class _HistoryTabHeaderViewState extends State<HistoryTabHeaderView> {
+class _HistoryTabHeaderViewState extends State<HistoryTabHeaderView>  {
   List<Image> imageList = [];
-  int randomNumber = 1 + Random().nextInt(7);
+  late int randomNumber;
+
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Stack(
-          children: [
-            Positioned.fill(
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: imageList[randomNumber],
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 450),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return SizeTransition(child: child, sizeFactor: animation,);
+          },
+          child: Stack(
+            key: ValueKey<String>(context.watch<HistoryHeader>().name),
+            children: [
+              Positioned.fill(
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(COLOR_DEFAULT_75, BlendMode.darken),
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: imageList[context.watch<HistoryHeader>().headerPicIndex],
+                  ),
                 ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-                  child: RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: '${context.watch<HistoryHeader>().name}',
-                      style: TextStyle(fontSize: 23, color: Colors.white),
-                    ),
-                    TextSpan(text: '\n\n'),
-                    TextSpan(
-                        text: '${context.watch<HistoryHeader>().summary}',
-                        style: TextStyle(fontSize: 20, color: Colors.white))
-                  ])),
-                ),
-              ],
-            ),
-          ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
+                    child: RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: '${context.watch<HistoryHeader>().name}',
+                        style: TextStyle(fontSize: 23, color: Colors.white, ),
+                      ),
+                      TextSpan(text: '\n\n'),
+                      TextSpan(
+                          text: '${context.watch<HistoryHeader>().summary}',
+                          style: TextStyle(fontSize: 20, color: Colors.white, letterSpacing: 0.6,))
+                    ])),
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
@@ -64,6 +72,7 @@ class _HistoryTabHeaderViewState extends State<HistoryTabHeaderView> {
 
   @override
   void initState() {
+    randomNumber  = 1 + Random().nextInt(6);
     super.initState();
     imageList = [
       Image.asset(
@@ -78,8 +87,6 @@ class _HistoryTabHeaderViewState extends State<HistoryTabHeaderView> {
           'assets/bg_${5}-min.jpg'),
       Image.asset(
           'assets/bg_${6}-min.jpg'),
-      Image.asset(
-          'assets/bg_${1}-min.jpg'),
       Image.asset(
           'assets/bg_${7}-min.jpg'),
     ];
