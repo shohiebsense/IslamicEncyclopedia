@@ -88,6 +88,9 @@ flutter:
    - family: MoonIconFont
      fonts:
         - asset: assets/fonts/MoonIconFont.ttf
+   - family: CrescentIconFont
+     fonts:
+        - asset: assets/fonts/CrescentIconFont.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

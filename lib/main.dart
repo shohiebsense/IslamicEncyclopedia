@@ -3,6 +3,7 @@
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
+import 'package:ensiklopedia_islam/page/about_page.dart';
 import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
 import 'package:ensiklopedia_islam/page/home_page.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage()} ,
+      routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage(), AboutPage.routeName : (context) => AboutPage()} ,
       theme: ThemeData(
         scaffoldBackgroundColor: COLOR_DEFAULT,
         visualDensity: VisualDensity.adaptivePlatformDensity,

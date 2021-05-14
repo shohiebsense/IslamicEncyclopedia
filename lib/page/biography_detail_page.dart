@@ -40,18 +40,16 @@ class BiographyDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BiographyDetailArgs biographyDetailArgs = ModalRoute.of(context)!.settings.arguments as BiographyDetailArgs;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             EnsiklopediaIslamAppBar(title: biographyDetailArgs.biography.name,),
             Container(
               width: MediaQuery.of(context).size.width,
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: imageList[randomNumber],
-                ),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: imageList[randomNumber],
               ),
             ),
             Row(
