@@ -176,9 +176,10 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                                       count: pageListLength,
                                       effect: ScrollingDotsEffect(
                                         activeStrokeWidth: 2.6,
-                                        activeDotScale: .4,
+                                        activeDotScale: .6,
                                         radius: 8,
                                         spacing: 10,
+                                        activeDotColor: Colors.green,
                                       )),
                                 ),
                               ),
