@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage(), AboutPage.routeName : (context) => AboutPage(),  } ,
       theme: ThemeData(
         scaffoldBackgroundColor: COLOR_DEFAULT,

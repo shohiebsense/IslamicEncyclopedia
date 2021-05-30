@@ -144,6 +144,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
               [
                 LayoutBuilder(builder: (context, constraints) {
                   var pageNumber = pageIndex + 1;
+                  var pageNumberIndicatorStr = '$pageNumber/${pageListLength}';
                   return Stack(
                     children: [
                       SizedBox(
@@ -185,7 +186,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                               ),
                               Center(
                                 child: Text(
-                                  pageNumber.toString(),
+                                  pageNumberIndicatorStr,
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
