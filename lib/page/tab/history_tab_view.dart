@@ -3,6 +3,8 @@ import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
+import 'package:ensiklopedia_islam/model/history_detail_header.dart';
+import 'package:ensiklopedia_islam/page/history_detail_page.dart';
 import 'package:ensiklopedia_islam/page/widget/history_item_view.dart';
 import 'package:ensiklopedia_islam/model/history_header.dart';
 import 'package:expandable/expandable.dart';
@@ -84,7 +86,9 @@ class HistoryTabViewState extends State<HistoryTabView>
                     );
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return HistoryItemView(index: index, desc: historyDetail.data![index].desc);
+                    return HistoryItemView(index: index, desc: historyDetail.data![index].desc, onItemTapped: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNotifierProvider.value(value: HistoryDetailHeader(), child: HistoryDetailPage(historyDetailPageArgs: HistoryDetailPageArgs(context.watch<HistoryHeader>().historyId, historyDetail.data![index].period, context.watch<HistoryHeader>().name, context.watch<HistoryHeader>().summary, index, historyDetail.data!, historyDetailDao, this.widget.historyDao),),)));
+                    });
                   },
                 ),
               );

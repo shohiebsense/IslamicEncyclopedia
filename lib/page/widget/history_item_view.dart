@@ -1,13 +1,15 @@
+import 'package:ensiklopedia_islam/page/history_detail_page.dart';
 import 'package:ensiklopedia_islam/page/widget/history_item_header_view.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class HistoryItemView extends StatelessWidget {
+  VoidCallback onItemTapped;
   final int index;
   final String desc;
 
-  HistoryItemView({required this.index, required this.desc});
+  HistoryItemView({required this.index, required this.desc, required this.onItemTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class HistoryItemView extends StatelessWidget {
                                     letterSpacing: 0.6,
                                     color: Colors.white,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w400),
                               ),
                             ),
                           ],
@@ -66,37 +68,40 @@ class HistoryItemView extends StatelessWidget {
                   ),
                 ),
               ),
-              expanded: Container(
-                color: COLOR_DEFAULT,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: HistoryHeaderView(index + 1),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text.rich(
-                              TextSpan(
-                                text: desc,
-                                style: TextStyle(
-                                    letterSpacing: 0.6,
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                        ],
+              expanded: InkWell(
+                onTap: onItemTapped,
+                child: Container(
+                  color: COLOR_DEFAULT,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: HistoryHeaderView(index + 1),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text.rich(
+                                TextSpan(
+                                  text: desc,
+                                  style: TextStyle(
+                                      letterSpacing: 0.6,
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               builder: (_, collapsed, expanded) {

@@ -3,7 +3,6 @@ import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
-import 'file:///C:/AndroidStudioProjectsFlutter/ensiklopedia_islam/lib/page/widget/prophet_tab_header_view.dart';
 import 'package:ensiklopedia_islam/page/tab/prophet_tab_view.dart';
 import 'package:ensiklopedia_islam/page/tab/sahabah_tab_view.dart';
 import 'package:ensiklopedia_islam/page/tab/ulama_tab_view.dart';
@@ -117,8 +116,8 @@ class _HomePageState extends State<HomePage>
                 ];
               },
               body: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
                 controller: tabController,
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   HistoryTabView(historyStorageKey,
                       this.widget.historyDetailDao, this.widget.historyDao),

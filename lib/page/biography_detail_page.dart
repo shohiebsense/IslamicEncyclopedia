@@ -47,6 +47,7 @@ class BiographyDetailPage extends StatelessWidget {
             EnsiklopediaIslamAppBar(title: biographyDetailArgs.biography.name,),
             Container(
               width: MediaQuery.of(context).size.width,
+              height: 300,
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: imageList[randomNumber],

@@ -12,14 +12,14 @@ class AboutPage extends StatelessWidget {
   static const routeName = '/about';
 
   var imageList = [
-    Image.asset('assets/bg_${1}-min.jpg'),
-    Image.asset('assets/bg_${2}-min.jpg'),
-    Image.asset('assets/bg_${3}-min.jpg'),
-    Image.asset('assets/bg_${4}-min.jpg'),
-    Image.asset('assets/bg_${5}-min.jpg'),
-    Image.asset('assets/bg_${6}-min.jpg'),
-    Image.asset('assets/bg_${1}-min.jpg'),
-    Image.asset('assets/bg_${7}-min.jpg'),
+    Image.asset('assets/bg_${1}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${2}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${3}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${4}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${5}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${6}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${1}-min.jpg', fit: BoxFit.fill,),
+    Image.asset('assets/bg_${7}-min.jpg', fit: BoxFit.fill,),
   ];
   var randomNumber = 1 + Random().nextInt(6);
 
@@ -35,10 +35,8 @@ class AboutPage extends StatelessWidget {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: imageList[randomNumber],
-              ),
+              height: 300,
+              child: imageList[randomNumber],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

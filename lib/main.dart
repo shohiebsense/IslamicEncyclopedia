@@ -3,8 +3,10 @@
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
+import 'package:ensiklopedia_islam/model/history_detail_header.dart';
 import 'package:ensiklopedia_islam/page/about_page.dart';
 import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
+import 'package:ensiklopedia_islam/page/history_detail_page.dart';
 import 'package:ensiklopedia_islam/page/home_page.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
@@ -32,7 +34,8 @@ Future<void> main() async {
 
   runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HistoryHeader(),)
+        ChangeNotifierProvider(create: (_) => HistoryHeader(), ),
+        ChangeNotifierProvider(create: (_) => HistoryDetailHeader(), ),
 
       ],
       child: MyApp(
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage(), AboutPage.routeName : (context) => AboutPage()} ,
+      routes: {BiographyDetailPage.routeName : (context) => BiographyDetailPage(), AboutPage.routeName : (context) => AboutPage(),  } ,
       theme: ThemeData(
         scaffoldBackgroundColor: COLOR_DEFAULT,
         visualDensity: VisualDensity.adaptivePlatformDensity,
