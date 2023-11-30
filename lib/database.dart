@@ -10,11 +10,8 @@ import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 
 import 'package:floor/floor.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sqflite;
-import 'model/biography.dart';
 part 'database.g.dart';
 
 

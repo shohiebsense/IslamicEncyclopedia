@@ -1,10 +1,8 @@
 import 'dart:math';
 
-import 'package:ensiklopedia_islam/model/history.dart';
 import 'package:ensiklopedia_islam/model/history_header.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 @immutable

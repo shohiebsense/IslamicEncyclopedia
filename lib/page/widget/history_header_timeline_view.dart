@@ -1,14 +1,11 @@
 import 'dart:math';
 
-import 'package:ensiklopedia_islam/main.dart';
-import 'package:ensiklopedia_islam/model/history.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail.dart';
 import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 import 'package:ensiklopedia_islam/model/history_header.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:ensiklopedia_islam/style/icon_moon.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:timelines/timelines.dart';
@@ -151,10 +148,8 @@ class StatefulWrapper extends StatefulWidget {
 class _StatefulWrapperState extends State<StatefulWrapper> {
   @override
   void initState() {
-    if(widget.onInit != null) {
-      widget.onInit();
-    }
-    super.initState();
+    widget.onInit();
+      super.initState();
   }  @override
   Widget build(BuildContext context) {
     return widget.child;

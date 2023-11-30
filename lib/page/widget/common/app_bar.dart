@@ -2,7 +2,6 @@ import 'package:ensiklopedia_islam/page/about_page.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:ensiklopedia_islam/style/text.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class EnsiklopediaIslamAppBar extends StatelessWidget {
   String? title;

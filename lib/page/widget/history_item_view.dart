@@ -1,4 +1,3 @@
-import 'package:ensiklopedia_islam/page/history_detail_page.dart';
 import 'package:ensiklopedia_islam/page/widget/history_item_header_view.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
 import 'package:expandable/expandable.dart';

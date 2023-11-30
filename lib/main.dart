@@ -1,4 +1,4 @@
-// @dart=2.9
+// @dart=2.12
 
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
@@ -6,15 +6,11 @@ import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_header.dart';
 import 'package:ensiklopedia_islam/page/about_page.dart';
 import 'package:ensiklopedia_islam/page/biography_detail_page.dart';
-import 'package:ensiklopedia_islam/page/history_detail_page.dart';
 import 'package:ensiklopedia_islam/page/home_page.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:timelines/timelines.dart';
 import 'package:provider/provider.dart';
 import 'database.dart';
-import 'model/history.dart';
 import 'model/history_header.dart';
 
 

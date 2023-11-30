@@ -5,7 +5,6 @@ import 'package:ensiklopedia_islam/model/history_detail_dao.dart';
 import 'package:ensiklopedia_islam/model/history_detail_header.dart';
 import 'package:ensiklopedia_islam/page/about_page.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +49,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
   final HideNavbar hiding = HideNavbar();
 
   List<HistoryDetail>? periodList;
-  PageController? _pageController;
+  late PageController _pageController;
   int pageIndex = 0;
   int currentPeriodIndex = 0;
   List<Widget> pageList = [];
@@ -76,9 +75,9 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
     pageIndex = this.widget.historyDetailPageArgs.index;
     _pageController =
         PageController(initialPage: this.widget.historyDetailPageArgs.index);
-    _pageController!.addListener(() {
+    _pageController.addListener(() {
       setState(() {
-        pageIndex = _pageController!.page!.toInt();
+        pageIndex = _pageController.page!.toInt();
       });
     });
 
@@ -144,7 +143,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
               [
                 LayoutBuilder(builder: (context, constraints) {
                   var pageNumber = pageIndex + 1;
-                  var pageNumberIndicatorStr = '$pageNumber/${pageListLength}';
+                  var pageNumberIndicatorStr = '$pageNumber/$pageListLength';
                   return Stack(
                     children: [
                       SizedBox(
@@ -254,7 +253,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
   }
 
   void navigateToNewPeriod() {
-    print("current period ${currentPeriodIndex}");
+    print("current period $currentPeriodIndex");
     HistoryDetail historyDetail = periodList![currentPeriodIndex];
     print("historyDetail " + historyDetail.historyId.toString());
     Future<History?> history = widget.historyDetailPageArgs.historyDao
@@ -293,12 +292,12 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
       if (_isFirstPage()) {
         currentPeriodIndex--;
         navigateToNewPeriod();
-        _pageController!.animateToPage(pageListLength - 1,
+        _pageController.animateToPage(pageListLength - 1,
             curve: Curves.easeIn, duration: Duration(milliseconds: 250));
         return;
       }
 
-      _pageController!.animateToPage(this.pageIndex - 1,
+      _pageController.animateToPage(this.pageIndex - 1,
           curve: Curves.easeIn, duration: Duration(milliseconds: 250));
     } else {
       if (_isPeriodLastIndex() && _isLastPage()) {
@@ -309,12 +308,12 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
         //navigate to next period
         currentPeriodIndex++;
         navigateToNewPeriod();
-        _pageController!.animateToPage(0,
+        _pageController.animateToPage(0,
             curve: Curves.easeIn, duration: Duration(milliseconds: 250));
         return;
       }
 
-      _pageController!.animateToPage(this.pageIndex + 1,
+      _pageController.animateToPage(this.pageIndex + 1,
           curve: Curves.easeIn, duration: Duration(milliseconds: 250));
     }
   }

@@ -1,4 +1,4 @@
-// @dart=2.9
+// @dart=2.12
 import 'package:after_layout/after_layout.dart';
 import 'package:ensiklopedia_islam/model/biography_dao.dart';
 import 'package:ensiklopedia_islam/model/history_dao.dart';
@@ -10,11 +10,7 @@ import 'package:ensiklopedia_islam/page/widget/common/app_bar.dart';
 import 'package:ensiklopedia_islam/page/widget/common/bottom_navbar_view.dart';
 import 'package:ensiklopedia_islam/page/widget/history_header_timeline_view.dart';
 import 'package:ensiklopedia_islam/style/color.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:timelines/timelines.dart';
 
 import 'tab/history_tab_view.dart';
 import 'widget/history_tab_header_view.dart';
@@ -24,7 +20,7 @@ class HomePage extends StatefulWidget {
   final HistoryDetailDao historyDetailDao;
   final HistoryDao historyDao;
 
-  const HomePage({this.historyDetailDao, this.historyDao, this.biographyDao});
+  const HomePage({required this.historyDetailDao, required this.historyDao, required this.biographyDao});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -32,13 +28,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, AfterLayoutMixin<HomePage> {
-  TabController tabController;
+  late TabController tabController;
   var _scrollController = ScrollController();
   bool isInnerBoxScrolled = false;
   bool isScrolling = false;
   bool isScrollingDown = false;
   bool flagScrolling = true;
-  String tabTitle;
+  late String tabTitle;
 
   PageStorageKey historyStorageKey = PageStorageKey('history');
   PageStorageKey prophetStorageKey = PageStorageKey('prophet');
@@ -176,11 +172,11 @@ class _HomePageState extends State<HomePage>
 
         if (_scrollController.position.atEdge) {
           if (_scrollController.position.pixels == 0) {
-            WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {
+            WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
                   //   key.currentState.expandableController.expanded = false;
                 }));
           } else {
-            WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {
+            WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
                   isScrolling = true;
                   //  key.currentState.expandableController.expanded = true;
                 }));

@@ -1,10 +1,8 @@
 import 'dart:math';
 
-import 'package:ensiklopedia_islam/model/biography.dart';
 import 'package:ensiklopedia_islam/page/widget/common/app_bar.dart';
 import 'package:ensiklopedia_islam/style/text.dart';
 import 'package:flutter/material.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 
 
 

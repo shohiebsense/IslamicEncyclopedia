@@ -1,5 +1,4 @@
 
-import 'package:floor/floor.dart';
 
 
 class Category {
